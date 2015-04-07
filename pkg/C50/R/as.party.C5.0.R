@@ -127,7 +127,8 @@ as.party.C5.0<-function(obj,trial=0,...){
   if(!is.default){
     mf<-model.frame(obj)
   }else{
-    mf<-data.frame(x=eval(parse(text=paste(obj$call)[2])),y=eval(parse(text=paste(obj$call)[3])))
+    mf<-data.frame(x=eval(parse(text=paste(obj$call)[2]), envir=parent.frame()),
+                   y=eval(parse(text=paste(obj$call)[3]), envir=parent.frame()))
     names(mf)[-c(length(obj$pred)+1)]<-obj$pred
   }
   if(length(out)==1){
